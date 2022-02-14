@@ -4,28 +4,39 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { signup, signin } from '../../actions/auth';
 
 import useStyles from './styles';
 import Input from './Input';
 import Icon from './Icon';
+import e from 'cors';
+
+const initState = { firstName:'', lastName:'', email:'', password:'', confirmPassword:''}
 
 const Auth = () => {
     const classes = useStyles();
     const [ showPassword, setShowPassword ] = useState(false);
     const [ isSignup, setIsSignUp ] = useState(false);
+    const [ formData, setFormData ] = useState(initState);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleShowPassword = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword) 
-    }
-
-    const handleSubmit = () => {
-
     };
 
-    const handleChange = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        
+        if (isSignup) {
+            dispatch(signup(formData, navigate))
+        } else {
+            dispatch(signin(formData, navigate))
+        }
+    };
 
+    const handleChange = (event) => {
+        setFormData( {...formData, [event.target.name]: event.target.value })
     };
 
     const switchMode = () => {
