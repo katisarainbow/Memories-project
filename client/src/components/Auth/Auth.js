@@ -9,20 +9,21 @@ import { signup, signin } from '../../actions/auth';
 import useStyles from './styles';
 import Input from './Input';
 import Icon from './Icon';
-import e from 'cors';
+import { AUTH } from '../../constants/actionTypes';
 
 const initState = { firstName:'', lastName:'', email:'', password:'', confirmPassword:''}
 
 const Auth = () => {
-    const classes = useStyles();
+    
     const [ showPassword, setShowPassword ] = useState(false);
     const [ isSignup, setIsSignUp ] = useState(false);
     const [ formData, setFormData ] = useState(initState);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const classes = useStyles();
 
     const handleShowPassword = () => {
-        setShowPassword((prevShowPassword) => !prevShowPassword) 
+        setShowPassword(!showPassword) 
     };
 
     const handleSubmit = (event) => {
@@ -40,8 +41,9 @@ const Auth = () => {
     };
 
     const switchMode = () => {
+        setFormData(initState);
         setIsSignUp((prevState) => !prevState);
-        handleShowPassword(false);
+        setShowPassword(false);
     };
 
     const googleSuccess = async (res) => {
@@ -49,7 +51,7 @@ const Auth = () => {
         const token = res?.tokenId;
 
         try {
-            dispatch({ type: 'AUTH', data: { result, token } });
+            dispatch({ type: AUTH, data: { result, token } });
             navigate("/");
         } catch (error) {
             console.log(error)
