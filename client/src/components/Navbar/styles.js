@@ -12,8 +12,11 @@ export default makeStyles((theme) => ({
     padding: '10px 50px',
   },
   heading: {
-    color: 'rgba(0,183,255, 1)',
+    color: '#2A1548',
+    marginTop: '15px',
+    marginLeft: '20px',
     textDecoration: 'none',
+    fontFamily: ['Luckiest Guy', 'cursive'].join(','),
   },
   image: {
     marginLeft: '15px',
@@ -26,11 +29,12 @@ export default makeStyles((theme) => ({
   profile: {
     display: 'flex',
     justifyContent: 'space-between',
-    width: '400px',
+    width: '300px',
   },
   userName: {
     display: 'flex',
     alignItems: 'center',
+    marginLeft: '0px'
   },
   brandContainer: {
     display: 'flex',
@@ -40,4 +44,19 @@ export default makeStyles((theme) => ({
     color: theme.palette.getContrastText(deepPurple[500]),
     backgroundColor: deepPurple[500],
   },
+  logout: {
+    backgroundColor: '#3C1F66',
+    color: 'white',
+
+    '&:hover': {
+      backgroundColor: '#2A1548',
+      borderColor: '#0062cc',
+      boxShadow: 'none',
+    },
+
+    '&:active': {
+      boxShadow: 'none',
+      backgroundColor: '#8B71B1',
+    },
+  }
 }));
